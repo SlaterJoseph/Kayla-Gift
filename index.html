@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> 
     <link rel="stylesheet" href="style.css"/>
-    <title>Happy Anniversary</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>    <title>Happy Anniversary</title>
 </head>
 <!-- AIzaSyCOSvSKrScSJNSyXvzLpPA4rOuqHJZex7U -->
 <body>
@@ -17,7 +17,34 @@
     <div class="wrapper side-panel-open">
 
         <div class="side-panel">
-            Our Dates
+            <h2> Our Days Together </h2>
+            <div class="row">
+                <form>
+                    <fieldset>
+                        <legend><h4>Add New Dates</h4></legend>
+                        <legend>Date</legend>
+                        <input type="date" class="form-control" id="date">
+                        <legend>Description</legend>
+                        <textarea></textarea>
+                        <legend>Latitude</legend>
+                        <input type="number" id="lat" name="">
+                        <legend>Longitude</legend>
+                        <input type="number" id="long" name="">
+                        <legend>Address</legend>
+                        <input type="text" id="address" name="">
+
+                        <button id="insert" onclick="insertDB()">Add Date</button>
+                        <button id="create" onclick="createDB()">Create Table</button>
+                        <button id="remove" onclick="removeDB()">Remove Table</button>
+                        <button id="fetch" onclick="fetchDB()">Fetch Record</button>
+                    </fieldset>
+                </form>
+
+                <hr>
+                <table class="theTable">
+
+                </table>
+            </div>
         </div>
 
         <button class="side-panel-toggle" type="button">
@@ -27,7 +54,7 @@
 
 
         <div class="main">
-            <h1>♥♥ Happy Anniversary ♥♥</h1>
+            <h1 id="anna">♥♥ Happy Anniversary ♥♥</h1>
 
             <div id="map"> </div>
         </div>
@@ -36,11 +63,9 @@
     
 
     </div>
-    <!-- Map will go here -->
     
-    </script>
-    <script src="app.js"></script>
-    
+    <script src="js/app.js"></script>
+    <script src="js/database.js"></script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOSvSKrScSJNSyXvzLpPA4rOuqHJZex7U&callback=initMap&v=weekly"
       defer

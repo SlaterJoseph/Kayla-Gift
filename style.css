@@ -36,7 +36,7 @@ body {
 
 .side-panel {
     display: none;
-    width: 200px;
+    width: 220px;
     flex-shrink: 0;
     padding: 20px;
     color: white;
@@ -68,3 +68,4 @@ body {
 h1 {
     text-align: center;
 }
+
