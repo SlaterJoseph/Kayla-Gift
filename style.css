@@ -69,3 +69,8 @@ h1 {
     text-align: center;
 }
 
+.dates-button{
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}

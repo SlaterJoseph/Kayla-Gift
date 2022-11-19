@@ -18,32 +18,9 @@
 
         <div class="side-panel">
             <h2> Our Days Together </h2>
-            <div class="row">
-                <form>
-                    <fieldset>
-                        <legend><h4>Add New Dates</h4></legend>
-                        <legend>Date</legend>
-                        <input type="date" class="form-control" id="date">
-                        <legend>Description</legend>
-                        <textarea></textarea>
-                        <legend>Latitude</legend>
-                        <input type="number" id="lat" name="">
-                        <legend>Longitude</legend>
-                        <input type="number" id="long" name="">
-                        <legend>Address</legend>
-                        <input type="text" id="address" name="">
-
-                        <button id="insert" onclick="insertDB()">Add Date</button>
-                        <button id="create" onclick="createDB()">Create Table</button>
-                        <button id="remove" onclick="removeDB()">Remove Table</button>
-                        <button id="fetch" onclick="fetchDB()">Fetch Record</button>
-                    </fieldset>
-                </form>
-
-                <hr>
-                <table class="theTable">
-
-                </table>
+            <div class="row" id="dates">
+                
+               
             </div>
         </div>
 
@@ -57,6 +34,17 @@
             <h1 id="anna">♥♥ Happy Anniversary ♥♥</h1>
 
             <div id="map"> </div>
+
+
+            <div id="description">
+                <p id="date-desc"></p>
+            </div>
+
+            <div id="pics">
+                <img id="img1">
+                <img id="img2">
+                <img id="img3">
+            </div>
         </div>
 
        

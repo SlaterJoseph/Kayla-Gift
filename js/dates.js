@@ -1,4 +1,6 @@
-const dates = [
+// So Date - Description - Locations - Path
+//So locations = [name, long, lat]
+export const dates = [
     //First Date
     ["04/26/2022", 
     "Our first date. I enjoyed our time together at Mocha Burger, but what stuck out to me was how the bowling failed, but we made the best of it and went to Dave and Busters instead and had great time. The whole interaction showed me you were special and there could be something between us.",
@@ -17,59 +19,3 @@ const dates = [
     [["Sushi Tokyo", 40.74104885044486, -73.99561488864039], ["AMC", 40.73158328921118, -73.9887710444611]],
     "images\dates\May-8-2022"]
 ];
-
-var map = "";
-var markersArray = [];
-
-for(var i = 0; i < dates.length; i++){
-    var section = document.getElementById("dates");
-    var btn = document.createElement("button");
-    btn.innerHTML = dates[i][0];
-    btn.className = "dates-button " + "dates-" + i;
-    section.appendChild(btn)
-}
-
-document.querySelector(".side-panel-toggle").addEventListener("click", () => {
-    document.querySelector(".wrapper").classList.toggle("side-panel-open");
-});
-
-function initMap(){
-    var options = {
-        zoom: 12,
-        center: {lat:40.7506, lng:-73.9935},
-    }
-
-    map = new google.maps.Map(document.getElementById('map'), options);
-}
-
-function add_marker(coords, map){
-    var marker = new google.maps.Marker({
-        position: coords,
-        map: map,
-        icon: "images/heart-marker.png"
-    });
-
-    // marker.setMap();
-    markersArray.push(marker);
-}
-
-$(function(){
-    $(".dates-button").click(function(){
-        const index = this.classList[1].split("-")[1];
-        const thisDate = dates[index];
-
-        clearOverlays();
-
-        for(var i = 0; i < thisDate[2].length; i++){
-            // alert("in loop")
-            const coords  = {lat: thisDate[2][i][1], lng: thisDate[2][1][2]}
-            add_marker(coords, map)
-        }
-        
-    });
-});
-
-function clearOverlays(){
-    for (var i = 0; i < markersArray.length; i++ ) markersArray[i].setMap(null);
-    markersArray.length = 0;
-}
