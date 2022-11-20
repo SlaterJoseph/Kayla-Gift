@@ -1,6 +1,3 @@
-* {
-}
-
 body {
     margin: 0;
     font-family: sans-serif;
@@ -95,15 +92,27 @@ h1 {
 #anna {
     color: pink;
     text-decoration: underline;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #date {
     color: #ff7879;
     text-align: center;
     text-decoration: underline;
+    margin: 5px 10px;
 }
 
 #date-desc {
     text-align: justify;
 }
 
+img {
+    width: 25%;
+    height: 25%;
+    display: inline-block;
+    margin-left: 25px;
+    margin-right: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+}

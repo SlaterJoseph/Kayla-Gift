@@ -61,12 +61,25 @@ $(function(){
         
         $("#date").html(thisDate[0]);
         $("#date-desc").html(thisDate[1]);
+        $("#pics").empty();
 
-        const pics = pickPics(thisDate[3]);
-        for(var i = 0; i < pics.length; i++){
-            var img = $("<img>")
-            img.attr("src", pics[i]);
-            $("#pics").append(img);
+        const month = new Map([
+            ["04", "Apr"],
+            ["05", "May"],
+            ["08", "Aug"],
+            ["09", "Sep"],
+            ["10", "Oct"],
+            ["11", "Nov"],
+        ]);
+
+        var day = month.get(thisDate[0].split('/')[0])+ "-" + thisDate[0].split('/')[1] + "-" + thisDate[0].split('/')[2];
+        var path = "images/dates/" + day + "/";
+
+        for(var i = 0; i < thisDate[3]; i++){
+            var thisPath = path + (i + 1) + ".jpg";
+            var img = $('<img>');
+            img.attr('src', thisPath);
+            img.appendTo("#pics");
         }
 
     });
@@ -75,49 +88,4 @@ $(function(){
 function clearOverlays(){
     for (var i = 0; i < markersArray.length; i++ ) markersArray[i].setMap(null);
     markersArray.length = 0;
-}
-
-var fs = require('fs');
-var path = require('path');
-// In newer Node.js versions where process is already global this isn't necessary.
-var process = require("process");
-
-function pickPics(datePath){
-
-    if(datePath === "None"){
-        return [];
-    }
-
-    fs.readdir(datePath, function (err, files) {
-        if (err) {
-            alert("Could not list the directory.", err);
-            process.exit(1);
-        }
-
-        var images = [];
-        files.forEach(function (file, index) {
-            // Make one pass and make the file complete
-            images.push(file);
-        });
-
-
-        if(images.length > 3){
-            var item1 = getRandomItem(images);
-            images.delete(item1);
-
-            var item2 = getRandomItem(images);
-            images.delete(item2);
-
-            var item3 = getRandomItem(images);
-            images.delete(item3);
-
-            return [item1, item2, item3];
-        } else return images;
-    });
-}
-
-function getRandomItem(arr) {
-    const randomIndex = Math.floor(Math.random() * arr.length);
-    const item = arr[randomIndex];
-    return item;
 }
