@@ -1,7 +1,11 @@
+* {
+}
+
 body {
     margin: 0;
     font-family: sans-serif;
     line-height: 1.5;
+    
 }
 
 .wrapper {
@@ -21,9 +25,8 @@ body {
     flex-shrink: 0;
     display: grid;
     place-items: center;
-
-    color: white;
-    background-color: aquamarine;
+    color: #f2efea;
+    background-color: #ff7879;
     border: none;
     border-radius: 0 5px 5px 0;
     outline: none;
@@ -31,16 +34,16 @@ body {
 }
 
 .side-panel-toggle:hover {
-    background-color: aqua;
+    background-color: #ff6b6c;
 }
 
 .side-panel {
     display: none;
-    width: 220px;
+    width: 250px;
     flex-shrink: 0;
     padding: 20px;
-    color: white;
-    background-color: aquamarine;
+    color: #f2efea;
+    background-color: #ff7879;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
 }
 
@@ -72,5 +75,35 @@ h1 {
 .dates-button{
     display: block;
     margin-bottom: 10px;
-    border-radius: 5px;
+    margin-left: 8px;
+    /* max-width: 100px; */
 }
+
+.side-panel h4{
+    text-align: center;
+    text-decoration: underline;
+}
+
+#anna .heart-1{
+    color: #ff6b6c;
+}
+
+#anna .heart-2{
+    color:#ff7879;
+}
+
+#anna {
+    color: pink;
+    text-decoration: underline;
+}
+
+#date {
+    color: #ff7879;
+    text-align: center;
+    text-decoration: underline;
+}
+
+#date-desc {
+    text-align: justify;
+}
+

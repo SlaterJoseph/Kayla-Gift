@@ -1,31 +1,23 @@
-const dates = [
-    //First Date
-    ["04/26/2022", 
-    "Our first date. I enjoyed our time together at Mocha Burger, but what stuck out to me was how the bowling failed, but we made the best of it and went to Dave and Busters instead and had great time. The whole interaction showed me you were special and there could be something between us.",
-    [["Mocha Burger", 40.72742794975771, -73.99976704720656], ["Dave & Buster's", 40.756520440332665, -73.98862455674823]],
-    "None"],
+function initMap(){
+    var options = {
+        zoom: 11,
+        center: {lat:40.70461243206324, lng:-73.99079274223253},
+    }
 
-    //2nd date
-    ["05/05/2022",
-    "Right when were in the prime we're seeing each other but not officially dating. I vividly remember Ari coming over to us and just asking if the two of us were dating, to which we both got real quite. We didn't want to say no cause we both knew where it was going, but didn't say yes cause it was a bit embarrasing.",
-    [["Brooklyn College", 40.63115824854505, -73.95347454339868], ["Funfest Bar & Lounge", 40.61266540113629, -73.91309370398818]],
-    "images\dates\May-5-2022"],
+    //40.70461243206324, -73.99079274223253
 
-    //3rd date
-    ["05/08/2022",
-    "Our first movie together, and the one we have probably watched the most of. I thought it was really cute how invested you were in the movie and the MCU as a whole, and it's the first time I got a real sense of your nerdy vibe. You said you loved the MCU but I didn't really get it til I saw you locked to the movie",
-    [["Sushi Tokyo", 40.74104885044486, -73.99561488864039], ["AMC", 40.73158328921118, -73.9887710444611]],
-    "images\dates\May-8-2022"]
-];
+    map = new google.maps.Map(document.getElementById('map'), options);
+}
 
+//Date - Description - [Name, Lat, Long] - Path to Images
 var map = "";
 var markersArray = [];
 
 for(var i = 0; i < dates.length; i++){
-    var section = document.getElementById("dates");
+    var section = document.getElementById("dates-date");
     var btn = document.createElement("button");
     btn.innerHTML = dates[i][0];
-    btn.className = "dates-button " + "dates-" + i;
+    btn.className = "dates-button " + "dates-" + i + " btn btn-outline-dark";
     section.appendChild(btn)
 }
 
@@ -33,25 +25,22 @@ document.querySelector(".side-panel-toggle").addEventListener("click", () => {
     document.querySelector(".wrapper").classList.toggle("side-panel-open");
 });
 
-function initMap(){
-    var options = {
-        zoom: 12,
-        center: {lat:40.7506, lng:-73.9935},
-    }
-
-    map = new google.maps.Map(document.getElementById('map'), options);
-}
-
-function add_marker(coords, map){
+function add_marker(coords, name, map){
     var marker = new google.maps.Marker({
         position: coords,
         map: map,
+        title: name,
         icon: "images/heart-marker.png"
     });
+
+    marker.addListener('click', function() {
+        alert("This is a marker of " + marker.getTitle() + ".");
+    })
 
     // marker.setMap();
     markersArray.push(marker);
 }
+
 
 $(function(){
     $(".dates-button").click(function(){
@@ -60,16 +49,75 @@ $(function(){
 
         clearOverlays();
 
-        for(var i = 0; i < thisDate[2].length; i++){
-            // alert("in loop")
-            const coords  = {lat: thisDate[2][i][1], lng: thisDate[2][1][2]}
-            add_marker(coords, map)
+        if(thisDate[2].length > 1){
+            for(var i = 0; i < thisDate[2].length; i++){
+                const coords  = {lat: thisDate[2][i][1], lng: thisDate[2][i][2]}
+                add_marker(coords, thisDate[2][i][0], map)
+            }
+        } else {
+            const coords  = {lat: thisDate[2][0][1], lng: thisDate[2][0][2]}
+            add_marker(coords, thisDate[2][0][0], map)
         }
         
+        $("#date").html(thisDate[0]);
+        $("#date-desc").html(thisDate[1]);
+
+        const pics = pickPics(thisDate[3]);
+        for(var i = 0; i < pics.length; i++){
+            var img = $("<img>")
+            img.attr("src", pics[i]);
+            $("#pics").append(img);
+        }
+
     });
 });
 
 function clearOverlays(){
     for (var i = 0; i < markersArray.length; i++ ) markersArray[i].setMap(null);
     markersArray.length = 0;
+}
+
+var fs = require('fs');
+var path = require('path');
+// In newer Node.js versions where process is already global this isn't necessary.
+var process = require("process");
+
+function pickPics(datePath){
+
+    if(datePath === "None"){
+        return [];
+    }
+
+    fs.readdir(datePath, function (err, files) {
+        if (err) {
+            alert("Could not list the directory.", err);
+            process.exit(1);
+        }
+
+        var images = [];
+        files.forEach(function (file, index) {
+            // Make one pass and make the file complete
+            images.push(file);
+        });
+
+
+        if(images.length > 3){
+            var item1 = getRandomItem(images);
+            images.delete(item1);
+
+            var item2 = getRandomItem(images);
+            images.delete(item2);
+
+            var item3 = getRandomItem(images);
+            images.delete(item3);
+
+            return [item1, item2, item3];
+        } else return images;
+    });
+}
+
+function getRandomItem(arr) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    const item = arr[randomIndex];
+    return item;
 }
